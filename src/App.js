@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { CssBaseline, Container, Paper, Box }  from '@material-ui/core';
+import { TodoProvider } from './components/TodoContext';
 import TodoInput from './components/TodoInput';
 
 const App = (props) => {
@@ -13,15 +14,17 @@ const App = (props) => {
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <Box component="div" className={clsx(classes.todoBackground)}>
-        <Container maxWidth="sm" className={clsx(classes.todoContainer)}>
-          <h1 className={clsx(classes.todoMainTitle)}>Todo App</h1>
-          <Paper elevation={3} className={clsx(classes.todoWrap)}>
-            <TodoInput onClick={onClick}/>
-          </Paper>
-        </Container>      
-      </Box>      
+      <TodoProvider>
+        <CssBaseline />
+        <Box component="div" className={clsx(classes.todoBackground)}>
+          <Container maxWidth="sm" className={clsx(classes.todoContainer)}>
+            <h1 className={clsx(classes.todoMainTitle)}>Todo App</h1>
+            <Paper elevation={3} className={clsx(classes.todoWrap)}>
+              <TodoInput onClick={onClick}/>
+            </Paper>
+          </Container>      
+        </Box>
+      </TodoProvider>      
     </React.Fragment>
   );
 }
