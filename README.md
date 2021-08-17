@@ -6,4 +6,5 @@
 - material-ul
 - clsx
 
-#### `yarn start`
+#### `npm install`
+#### `npm start`
