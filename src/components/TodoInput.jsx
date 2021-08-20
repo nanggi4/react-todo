@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 
 const TodoInput = (props) => {
   const classes = props.classes;
+  const todoInputWrap = useRef();
+
+  const handleInput = (e) => {
+    props.setTodoInput(e.target.value);
+    todoInputWrap.current.focus();
+  }
 
   return (
     <React.Fragment>
@@ -17,7 +23,9 @@ const TodoInput = (props) => {
           shrink: true,
         }}
         variant="outlined"
+        ref={todoInputWrap}
         className={clsx(classes.todoInput)}
+        onChange={e => handleInput(e)}
       />
       <Button 
         className={clsx(classes.todoAddBtn)} 

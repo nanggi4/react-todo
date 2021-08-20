@@ -7,8 +7,8 @@ export const TodoProvider = (props) => {
   const [todoList, setTodoList] = useState([]);
 
   return (
-    <TodoProvider.Provider value={[todoList, setTodoList]}>
+    <TodoContext.Provider value={[todoList, setTodoList]}>
       {props.children}
-    </TodoProvider.Provider>
+    </TodoContext.Provider>
   )
 };

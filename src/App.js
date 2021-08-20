@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { CssBaseline, Container, Paper, Box }  from '@material-ui/core';
@@ -8,8 +8,11 @@ import TodoInput from './components/TodoInput';
 const App = (props) => {
   const classes = props.classes;
 
-  const onClick = () => {
-    console.log('click !');
+  const [todoInput, setTodoInput] = useState("");
+
+  const onClick = (e) => {
+    if (todoInput === "") return false;
+    alert(todoInput);
   }
 
   return (
@@ -20,7 +23,10 @@ const App = (props) => {
           <Container maxWidth="sm" className={clsx(classes.todoContainer)}>
             <h1 className={clsx(classes.todoMainTitle)}>Todo App</h1>
             <Paper elevation={3} className={clsx(classes.todoWrap)}>
-              <TodoInput onClick={onClick}/>
+              <TodoInput 
+                setTodoInput={setTodoInput}
+                onClick={onClick}
+              />
             </Paper>
           </Container>      
         </Box>
