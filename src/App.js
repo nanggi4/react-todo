@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { CssBaseline, Container, Paper, Box }  from '@material-ui/core';
 import { TodoProvider } from './components/TodoContext';
 import TodoInput from './components/TodoInput';
+import TodoList from './components/TodoList';
 
 const App = (props) => {
   const classes = props.classes;
@@ -12,7 +13,6 @@ const App = (props) => {
 
   const onClick = (e) => {
     if (todoInput === "") return false;
-    alert(todoInput);
   }
 
   return (
@@ -27,6 +27,7 @@ const App = (props) => {
                 setTodoInput={setTodoInput}
                 onClick={onClick}
               />
+              <TodoList />
             </Paper>
           </Container>      
         </Box>
