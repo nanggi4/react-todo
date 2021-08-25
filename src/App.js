@@ -2,36 +2,39 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { CssBaseline, Container, Paper, Box }  from '@material-ui/core';
-import { TodoProvider } from './components/TodoContext';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 
 const App = (props) => {
   const classes = props.classes;
+  const [todoList, setTodoList] = useState([]);
 
-  const [todoInput, setTodoInput] = useState("");
-
-  const onClick = (e) => {
-    if (todoInput === "") return false;
+  const onClickInput = (_todoInput) => {
+    setTodoList([...todoList, _todoInput]);
   }
+
+  useEffect(() => {
+    console.log(todoList);
+  }, [todoList])
 
   return (
     <React.Fragment>
-      <TodoProvider>
-        <CssBaseline />
-        <Box component="div" className={clsx(classes.todoBackground)}>
-          <Container maxWidth="sm" className={clsx(classes.todoContainer)}>
-            <h1 className={clsx(classes.todoMainTitle)}>Todo App</h1>
-            <Paper elevation={3} className={clsx(classes.todoWrap)}>
-              <TodoInput 
-                setTodoInput={setTodoInput}
-                onClick={onClick}
+      <CssBaseline />
+      <Box component="div" className={clsx(classes.todoBackground)}>
+        <Container maxWidth="sm" className={clsx(classes.todoContainer)}>
+          <h1 className={clsx(classes.todoMainTitle)}>Todo App</h1>
+          <Paper elevation={3} className={clsx(classes.todoWrap)}>
+            <TodoInput 
+              onClickInput={onClickInput}
+            />
+            {todoList.length > 0 && (
+              <TodoList 
+                todoList={todoList}
               />
-              <TodoList />
-            </Paper>
-          </Container>      
-        </Box>
-      </TodoProvider>      
+            )}
+          </Paper>
+        </Container>      
+      </Box>
     </React.Fragment>
   );
 }

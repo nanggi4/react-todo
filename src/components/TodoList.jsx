@@ -1,38 +1,30 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
+import Todo from './Todo';
 import { withStyles } from '@material-ui/core/styles';
-import { TodoContext } from './TodoContext';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const TodoList = (props) => {
   const classes = props.classes;
-  const [todoList, setTodoList] = useContext(TodoContext);
+
+  const deleteTodo = (id) => {
+    console.log('click', id);
+  };
 
   useEffect(() => {
-    console.log(todoList);
-  }, [])
+  }, []);
 
   return (
     <React.Fragment>
       <Paper elevation={3} className={clsx(classes.todoListWrap)}>
         <List>
-          {todoList.map((todo, index) => (
-            <ListItem>
-              <ListItemText
-                primary={todo.todo}
-              />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
+          {props.todoList.map((todo, index) => (
+            <Todo 
+              key={index}
+              todo={todo}
+              deleteTodo={deleteTodo}
+            />
           ))}              
         </List>
       </Paper>      

@@ -5,10 +5,12 @@ import { TextField, Button } from '@material-ui/core';
 
 const TodoInput = (props) => {
   const classes = props.classes;
+  const [todoInput, setTodoInput] = useState('');
   const todoInputWrap = useRef();
 
-  const handleInput = (e) => {
-    props.setTodoInput(e.target.value);
+  const handleClick = () => {
+    props.onClickInput(todoInput);
+    setTodoInput("");
     todoInputWrap.current.focus();
   }
 
@@ -23,9 +25,10 @@ const TodoInput = (props) => {
           shrink: true,
         }}
         variant="outlined"
+        value={todoInput}
         ref={todoInputWrap}
         className={clsx(classes.todoInput)}
-        onChange={e => handleInput(e)}
+        onChange={e => setTodoInput(e.target.value)}
       />
       <Button 
         className={clsx(classes.todoAddBtn)} 
@@ -33,7 +36,7 @@ const TodoInput = (props) => {
         size="small" 
         color="primary" 
         fullWidth
-        onClick={props.onClick}
+        onClick={e => handleClick()}
       >
         Add
       </Button>      
